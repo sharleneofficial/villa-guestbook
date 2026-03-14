@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: 'DM Sans', sans-serif;
+  --font-serif: 'Playfair Display', serif;
+
+  /* Vibrant Mediterranean/Greek island color palette */
+  --color-background: hsl(40 60% 97%); /* Warm White/Cream */
+  --color-foreground: hsl(220 40% 15%); /* Deep Navy */
+  
+  --color-primary: hsl(216 90% 45%); /* Vibrant Cobalt Blue */
+  --color-primary-foreground: hsl(0 0% 100%);
+  
+  --color-secondary: hsl(230 20% 92%); /* Soft Lavender-Grey */
+  --color-secondary-foreground: hsl(220 40% 15%);
+  
+  --color-muted: hsl(230 20% 92%);
+  --color-muted-foreground: hsl(220 20% 40%);
+  
+  --color-accent: hsl(15 85% 58%); /* Bright Coral/Terracotta */
+  --color-accent-foreground: hsl(0 0% 100%);
+  
+  --color-destructive: hsl(0 80% 55%);
+  --color-destructive-foreground: hsl(0 0% 100%);
+  
+  --color-border: hsl(220 20% 85%);
+  --color-input: hsl(220 20% 90%);
+  --color-ring: hsl(216 90% 45%);
+  
+  --color-card: hsl(0 0% 100%);
+  --color-card-foreground: hsl(220 40% 15%);
+  --color-card-border: hsl(220 20% 92%);
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+}
+
+:root {
+  --background: 40 60% 97%;
+  --foreground: 220 40% 15%;
+  --primary: 216 90% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 230 20% 92%;
+  --secondary-foreground: 220 40% 15%;
+  --muted: 230 20% 92%;
+  --muted-foreground: 220 20% 40%;
+  --accent: 15 85% 58%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 80% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 220 20% 85%;
+  --input: 220 20% 90%;
+  --ring: 216 90% 45%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 40% 15%;
+  --card-border: 220 20% 92%;
+}
+
+.dark {
+  /* Mediterranean dark mode */
+  --background: 220 40% 10%;
+  --foreground: 40 60% 97%;
+  --primary: 216 90% 60%;
+  --primary-foreground: 220 40% 10%;
+  --secondary: 220 30% 18%;
+  --secondary-foreground: 40 60% 90%;
+  --muted: 220 30% 18%;
+  --muted-foreground: 220 20% 65%;
+  --accent: 15 85% 65%;
+  --accent-foreground: 220 40% 10%;
+  --border: 220 30% 25%;
+  --input: 220 30% 25%;
+  --ring: 216 90% 60%;
+  --card: 220 40% 12%;
+  --card-foreground: 40 60% 97%;
+  --card-border: 220 30% 20%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-primary-foreground;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-medium tracking-wide;
+  }
+}
+
+/* Custom utility for a soft inner shadow on inputs */
+@layer utilities {
+  .shadow-inner-soft {
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.02);
+  }
+}
+
+/* Solana wallet adapter button — override to match site theme */
+.wallet-adapter-button {
+  background: linear-gradient(135deg, hsl(216 90% 45%), hsl(216 90% 38%)) !important;
+  border-radius: 12px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.875rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  padding: 0.6rem 1.1rem !important;
+  height: auto !important;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.35) !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(8px) !important;
+}
+
+.wallet-adapter-button:hover:not([disabled]) {
+  background: linear-gradient(135deg, hsl(216 90% 40%), hsl(216 90% 33%)) !important;
+  box-shadow: 0 4px 18px rgba(37, 99, 235, 0.45) !important;
+  transform: translateY(-1px) !important;
+}
+
+.wallet-adapter-button:not([disabled]):focus-visible {
+  outline: 2px solid hsl(216 90% 60%) !important;
+  outline-offset: 2px !important;
+}
+
+.wallet-adapter-modal-wrapper {
+  border-radius: 20px !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+.wallet-adapter-modal-title {
+  font-family: 'Playfair Display', serif !important;
+  font-size: 1.5rem !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button {
+  border-radius: 10px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: inherit !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+.wallet-adapter-modal-list .wallet-adapter-button:hover {
+  background: rgba(37, 99, 235, 0.06) !important;
+  box-shadow: none !important;
+  transform: none !important;
+}

@@ -1,0 +1,101 @@
+openapi: 3.1.0
+info:
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: messages
+    description: Guestbook message operations
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /messages:
+    get:
+      operationId: getMessages
+      tags: [messages]
+      summary: Get all guestbook messages
+      description: Returns all messages, newest first
+      responses:
+        "200":
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Message"
+    post:
+      operationId: createMessage
+      tags: [messages]
+      summary: Create a new guestbook message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMessageInput"
+      responses:
+        "201":
+          description: Message created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Message"
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        message:
+          type: string
+        walletAddress:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - name
+        - message
+        - createdAt
+    CreateMessageInput:
+      type: object
+      properties:
+        name:
+          type: string
+        message:
+          type: string
+        walletAddress:
+          type: string
+          nullable: true
+      required:
+        - name
+        - message
